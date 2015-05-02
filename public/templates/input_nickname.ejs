@@ -1,0 +1,11 @@
+<div class='modal-header'>
+  <h3>Input Your Nickname</h3>
+</div>
+<div class='modal-body'>
+  <form ng-submit="save_nickname()">
+    <input type='text' autofocus="autofocus" class='form-control' ng-enter='save-nickname()' ng-model='nickname'/>
+  </form>
+</div>
+<div class='modal-footer'>
+  <button class='btn btn-primary' ng-click='save_nickname()'>OK</button>
+</div>

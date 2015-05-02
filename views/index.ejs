@@ -3,24 +3,37 @@
   <head>
     <title><%= title %></title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
   </head>
   <body>
-    <div ng-app='chat_room_module'>
-      <div ng-controller='chat_controller'>
-        <ul id='messages'>
-          <li ng-repeat='msg in messages track by $index'>
-            <p ng-bind='msg'></p>
-          </li>
-        </ul>
-        <form>
-          <input ng-model='message'/>
-          <button ng-click='send(message)'>Send</button>
-        </form>
+    <div class='chat_app' ng-app='chat_room_module'>
+      <div class='col-xs-12 col-md-6 col-md-offset-3 message_box' ng-controller='chat_controller'>
+        <div class='panel panel-info message_panel'>
+          <div class="panel-heading">Messages</div>
+          <div id='messages' class="panel-body" scroll-glue>
+            <li ng-repeat='msg in messages track by $index'>
+              <p ng-bind='msg'></p>
+            </li>
+            <form id='message_form'>
+              <div class='form-group'>
+                <div class='input-group'>
+                  <input type="text" autofocus="autofocus" class='form-control' ng-model='message' placeholder='Input your message...'>
+                  <span class='input-group-btn'>
+                    <button class='btn btn-primary' ng-click="send(message)">Send</button>
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </body>
   <script type="text/javascript" src='/bower_components/jquery/dist/jquery.min.js'></script>
   <script type='text/javascript' src='/socket.io/socket.io.js'></script>
   <script type="text/javascript" src='/bower_components/angular/angular.js'></script>
+  <script type="text/javascript" src='/bower_components/angular-scroll-glue/src/scrollglue.js'></script>
+  <script type="text/javascript" src='/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'></script>
   <script type="text/javascript" src='/javascripts/chat_room_module.js'></script>
+  <script type="text/javascript" src='/javascripts/chat_controller.js'></script>
 </html>
