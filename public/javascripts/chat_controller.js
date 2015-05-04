@@ -17,6 +17,7 @@ ChatRoomModule.controller('chat_controller', function ($scope, $modal, $log, soc
   });
 
   $scope.send = function (message) {
+    message = message || '';
     socket.emit('chat message', $scope.nickname + ': ' + message);
     $scope.message = '';
   };
