@@ -1,5 +1,4 @@
 ChatRoomModule.controller('chat_controller', function ($scope, $modal, $log, socket) {
-  $scope.test = 'world';
   $scope.messages = [];
 
   socket.on('chat message', function (msg) {
@@ -23,8 +22,9 @@ ChatRoomModule.controller('chat_controller', function ($scope, $modal, $log, soc
   };
 });
 
-ChatRoomModule.controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
+ChatRoomModule.controller('ModalInstanceCtrl', function ($scope, $modalInstance, socket) {
   $scope.save_nickname = function () {
+    socket.emit('add user', $scope.nickname);
     $modalInstance.close($scope.nickname);
   };
 });

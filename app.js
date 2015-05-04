@@ -61,8 +61,6 @@ app.use(function(err, req, res, next) {
 
 // socket io message
 io.on('connection', function (socket) {
-  console.log('a user connected');
-
   socket.on('disconnect', function () {
     console.log('user disconnected');
   });
@@ -71,6 +69,11 @@ io.on('connection', function (socket) {
     console.log('message: ' + msg);
     io.emit('chat message', msg);
   });
+
+  socket.on('add user', function (nickname) {
+    console.log('user ' + nickname + ' connected');
+    io.emit('add user', nickname);
+  })
 });
 
 // run this app on port 4567
