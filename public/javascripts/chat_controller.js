@@ -3,9 +3,10 @@ ChatRoomModule.controller('chat_controller', function ($scope, $modal, $log, soc
   $scope.users = [];
 
   var modalInstance = $modal.open({
-    templateUrl: '/templates/input_nickname.ejs',
-    size: 'sm',
-    controller: 'ModalInstanceCtrl'
+    templateUrl : '/templates/input_nickname.ejs',
+    size        : 'sm',
+    backdrop    : 'static',
+    controller  : 'ModalInstanceCtrl'
   });
 
   modalInstance.result.then(function (nickname) {
