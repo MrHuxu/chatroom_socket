@@ -6,38 +6,44 @@
     <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
   </head>
   <body>
-    <div class='chat_app' ng-app='chat_room_module'>
-      <div class='col-12 col-md-2 col-md-offset-1 user_box' ng-controller="user_controller">
-        <div class='panel panel-success user_panel'>
-          <div class='panel-heading'>Users</div>
-          <div class='panel-body'>
-            <button class='btn btn-success user_button'>Global Chat</button>
-            <div ng-repeat="user in users">
-              <br />
-              <button class='btn btn-warning user_button' ng-bind="user"></button>
+    <div class='full-height' ng-app='chat_room_module'>
+      <div class='col-xs-12 col-md-8 col-md-offset-2 full-height' ng-controller='chat_controller'>
+        
+        <div class='col-xs-12 col-md-3 full-height'>
+          <div class='panel panel-success user_panel'>
+            <div class='panel-heading'>Users | Online: {{users.length}}</div>
+            <div class='panel-body'>
+              <button class='btn btn-success user_button'>Global Chat</button>
+              <div ng-repeat="user in users track by $index">
+                <br />
+                <button class='btn btn-warning user_button' ng-bind="user"></button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class='col-xs-12 col-md-6 message_box' ng-controller='chat_controller'>
-        <div class='panel panel-info message_panel'>
-          <div class="panel-heading">Messages</div>
-          <div id='messages' class="panel-body" scroll-glue>
-            <li ng-repeat='msg in messages track by $index'>
-              <p ng-bind='msg'></p>
-            </li>
-            <form id='message_form'>
-              <div class='form-group'>
-                <div class='input-group'>
-                  <input type="text" class='form-control' ng-model='message' placeholder='Input your message...'>
-                  <span class='input-group-btn'>
-                    <button class='btn btn-primary' ng-click="send(message)">Send</button>
-                  </span>
+
+        <div class='col-xs-12 col-md-9 full-height'>
+          <div class='panel panel-info message_panel'>
+            <div class="panel-heading">Messages</div>
+            <div id='messages' class="panel-body" scroll-glue>
+              <li ng-repeat='msg in messages track by $index'>
+                <p ng-bind='msg'></p>
+              </li>
+              <form id='message_form'>
+                <div class='form-group'>
+                  <div class='input-group'>
+                    <div class="input-group-addon" ng-bind='nickname + ": "'></div>
+                    <input type="text" class='form-control' ng-model='message' placeholder='Input your message...'>
+                    <span class='input-group-btn'>
+                      <button class='btn btn-primary' ng-click="send(message)">Send</button>
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </body>
@@ -48,5 +54,4 @@
   <script type="text/javascript" src='/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'></script>
   <script type="text/javascript" src='/javascripts/chat_room_module.js'></script>
   <script type="text/javascript" src='/javascripts/chat_controller.js'></script>
-  <script type="text/javascript" src='/javascripts/user_controller.js'></script>
 </html>

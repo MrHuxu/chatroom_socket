@@ -9,9 +9,8 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var server = require('http').Server(app);
+var socket_service = require('./lib/socket_service').initSocketService(server);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -59,25 +58,9 @@ app.use(function(err, req, res, next) {
   });
 });
 
-// socket io message
-io.on('connection', function (socket) {
-  socket.on('disconnect', function () {
-    console.log('user disconnected');
-  });
-
-  socket.on('chat message', function (msg) {
-    console.log('message: ' + msg);
-    io.emit('chat message', msg);
-  });
-
-  socket.on('add user', function (nickname) {
-    console.log('user ' + nickname + ' connected');
-    io.emit('add user', nickname);
-  })
-});
 
 // run this app on port 4567
-http.listen(4567, function () {
+server.listen(4567, function () {
   console.log('listening on port 4567');
 });
 
