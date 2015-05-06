@@ -33,7 +33,7 @@
                 <div class='form-group'>
                   <div class='input-group'>
                     <div class="input-group-addon" ng-bind='nickname + ": "'></div>
-                    <input type="text" class='form-control' ng-model='message' placeholder='Input your message...'>
+                    <input type="text" class='form-control' ng-model='message' placeholder='Input your message...' ng-disabled="!nickname">
                     <span class='input-group-btn'>
                       <button class='btn btn-primary' ng-click="send(message)">Send</button>
                     </span>

@@ -2,6 +2,12 @@
   <h3>Input Your Nickname</h3>
 </div>
 <div class='modal-body'>
+  <div class="alert alert-danger alert-dismissible" role="alert" ng-if='blank'>
+    <strong>Warning!</strong> Your nickname cannot be empty.
+  </div>
+  <div class="alert alert-danger alert-dismissible" role="alert" ng-if='duplicate'>
+    <strong>Warning!</strong> Your nickname is duplicate with an existing one.
+  </div>
   <form ng-submit="save_nickname()">
     <input type='text' autofocus="autofocus" class='form-control' ng-enter='save-nickname()' ng-model='nickname'/>
   </form>

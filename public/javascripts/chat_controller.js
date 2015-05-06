@@ -53,9 +53,22 @@ ChatRoomModule.controller('chat_controller', function ($scope, $modal, $log, soc
 });
 
 ChatRoomModule.controller('ModalInstanceCtrl', function ($scope, $modalInstance, socket) {
+  $scope.blank = false;
+  $scope.duplicate = false;
+
   $scope.save_nickname = function () {
-    var nickname = $scope.nickname || 'Anonymous';
-    socket.emit('add user', nickname);
-    $modalInstance.close(nickname);
+    if ($scope.nickname === '' || $scope.nickname === null || $scope.nickname === undefined)
+      $scope.blank = true;
+    else
+      socket.emit('add user', $scope.nickname);
   };
+
+  socket.on('check duplicate', function (msg) {
+    if (msg.name === $scope.nickname) {
+      if (msg.index !== -1)
+        $scope.duplicate = true;
+      else
+        $modalInstance.close($scope.nickname);
+    }
+  });
 });
